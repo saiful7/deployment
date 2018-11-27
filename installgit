@@ -1,0 +1,40 @@
+#!/bin/bash
+
+centosversion=`rpm -qa \*-release | grep -Ei "oracle|redhat|centos" | cut -d"-" -f3`
+echo "######################################################################################################"
+echo "CentOS $centosversion server detected, Git 2* will install and configre as per centos $centosversion"
+echo "######################################################################################################"
+
+if [ $centosversion -eq "6" ]; then
+echo 
+echo "# Git YUM repo installing as per Centos 6"
+echo
+yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-git-release-6-1.noarch.rpm
+echo
+echo "Congratulations Wandisco YUM repo installed Successfully on the system "
+echo
+echo "Now installing Git on $hostname server"
+yum install git -y
+yum update git -y
+fi
+
+if [ $centosversion -eq "7" ]; then
+echo 
+echo "# Git YUM repo installing as per Centos 7"
+echo
+yum install -y http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
+echo
+echo "Now installing Git on $hostname server"
+yum install git -y
+yum update git -y
+
+fi 
+
+clear
+
+echo "GIT Latest version installed Successfully"
+git --version
+
+echo "Thanks :: Saiful Islam Rokon Akon"
+
+exit 0
